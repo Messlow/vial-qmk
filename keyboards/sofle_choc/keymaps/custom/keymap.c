@@ -15,6 +15,16 @@
  */
 #include QMK_KEYBOARD_H
 
+// Helpful defines
+#define GRAVE_MODS (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT) | MOD_BIT(KC_LGUI) | MOD_BIT(KC_RGUI) | MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT))
+
+enum layer_names {
+    QWERTY_LAYER,
+    COLEMAK_DH_LAYER,
+    PROG_LAYER,
+};
+
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * QWERTY
@@ -32,21 +42,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'           '------''---------------------------'
      */
 
-    LAYOUT(
+    [QWERTY_LAYER] = LAYOUT(
         KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,     KC_7,     KC_8,    KC_9,    KC_0,    KC_GRV,
         KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,     KC_U,     KC_I,    KC_O,    KC_P,    KC_BSPC,
         KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,     KC_J,     KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,   KC_MPLY,KC_N,     KC_M,     KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+        KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_MPLY,   MS_BTN3,KC_N,     KC_M,     KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                        KC_LCTL, KC_LGUI, KC_LCMD, KC_LALT, KC_ENT,    KC_SPC, KC_RALT,  KC_RCMD,  KC_RGUI, KC_RCTL
+    ),
+
+    /*
+     * COLEMAK-DH
+     * ,-----------------------------------------.                    ,-----------------------------------------.
+     * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+     * | ESC  |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+     * | Tab  |   A  |   R  |   S  |   T  |   G  |-------.    ,-------|   M  |   N  |   E  |   I  |   O  |  '   |
+     * |------+------+------+------+------+------|  Mute |    | Pause |------+------+------+------+------+------|
+     * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
+     * `-----------------------------------------/       /     \      \-----------------------------------------'
+     *            | LCTL | LGUI | LCMD | LALT | /Enter  /       \Space \  | RALT | RCMD | RGUI | RCTL |
+     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+     *            `----------------------------------'           '------''---------------------------'
+     */
+    [COLEMAK_DH_LAYER] = LAYOUT(
+        KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,     KC_7,     KC_8,    KC_9,    KC_0,    KC_GRV,
+        KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                       KC_J,     KC_L,     KC_U,    KC_Y,    KC_SCLN,    KC_BSPC,
+        KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                       KC_M,     KC_N,     KC_E,    KC_I,    KC_O, KC_QUOT,
+        KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,    KC_MPLY,   MS_BTN3,KC_K,     KC_H,     KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                         KC_LCTL, KC_LGUI, KC_LCMD, KC_LALT, KC_ENT,    KC_SPC, KC_RALT,  KC_RCMD,  KC_RGUI, KC_RCTL
     )
+
 };
+// clang-format on
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
+    {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(MS_WHLD, MS_WHLU)},
 };
 #endif
 
 #ifdef OLED_ENABLE
-#include "oled.c"
+#    include "oled.c"
+#endif
+
+#ifdef RGB_MATRIX_ENABLE
+#    include "rgb.c"
 #endif

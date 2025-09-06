@@ -1,7 +1,12 @@
 #pragma once
 
-#define ANIM_FRAME_TIME 1000
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdlib.h>
+#include "oled_driver.h"
+#include "timer.h"
+
+#define ANIM_FRAME_TIME 1000
 
 int random_int(int min, int max) {
     return min + rand() / (RAND_MAX / (max - min + 1) + 1);
@@ -41,17 +46,17 @@ static void render_nyabo_animation(void) {
                 oled_write_raw_P(nyabo_raw, sizeof(nyabo_raw));
                 break;
 
-                case 2:
-                    oled_write_raw_P(nyabo_tongue, sizeof(nyabo_tongue));
-                    break;
+            case 2:
+                oled_write_raw_P(nyabo_tongue, sizeof(nyabo_tongue));
+                break;
 
-                case 3:
-                    oled_write_raw_P(nyabo_left, sizeof(nyabo_left));
-                    break;
+            case 3:
+                oled_write_raw_P(nyabo_left, sizeof(nyabo_left));
+                break;
 
-                case 4:
-                    oled_write_raw_P(nyabo_right, sizeof(nyabo_right));
-                    break;
+            case 4:
+                oled_write_raw_P(nyabo_right, sizeof(nyabo_right));
+                break;
 
             default:
                 break;
