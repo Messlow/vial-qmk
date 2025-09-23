@@ -35,10 +35,10 @@ rgb_t thumb_color;
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch (get_highest_layer(layer_state | default_layer_state)) {
         default:
-            char_color   = hsv_to_rgb_limited(HSV_MAGENTA);
+            char_color   = hsv_to_rgb_limited(HSV_YELLOW);
             home_color   = hsv_to_rgb_limited(HSV_YELLOW);
             number_color = hsv_to_rgb_limited(HSV_CORAL);
-            mod_color    = hsv_to_rgb_limited(HSV_SPRINGGREEN);
+            mod_color    = hsv_to_rgb_limited(HSV_TEAL);
             thumb_color  = hsv_to_rgb_limited(HSV_TEAL);
 
             set_color(char_leds, sizeof(char_leds) / sizeof(char_leds[0]), char_color);
