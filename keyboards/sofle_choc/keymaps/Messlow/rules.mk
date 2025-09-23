@@ -7,7 +7,7 @@ VIALRGB_ENABLE = yes
 SPLIT_KEYBOARD = yes
 CAPS_WORD_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
-LTO_ENABLE = yes  # optim for compiling, should be tested
+LTO_ENABLE = no  # optim for compiling, should be tested
 
 # Vial
 VIAL_ENABLE = no	# vial causes issues atm, so disabling
