@@ -3,14 +3,15 @@ ENCODER_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 MOUSEKEY_ENABLE = yes
-VIALRGB_ENABLE = no
+VIALRGB_ENABLE = yes
 SPLIT_KEYBOARD = yes
 CAPS_WORD_ENABLE = yes
+REPEAT_KEY_ENABLE = yes
+LTO_ENABLE = yes  # optim for compiling, should be tested
 
 # Vial
-VIAL_ENABLE = yes
-QMK_SETTINGS = yes
-LTO_ENABLE = yes  # optim for compiling, should be tested
+VIAL_ENABLE = no	# vial causes issues atm, so disabling
+QMK_SETTINGS = no
 TAP_DANCE_ENABLE = no
 
 # VIA
@@ -32,7 +33,7 @@ MIDI_ENABLE = no
 UNICODE_ENABLE = no
 BLUETOOTH_ENABLE = no
 CUSTOM_MATRIX = no
-DEBOUNCE_TYPE = no
+# DEBOUNCE_TYPE = no  # this creates an error when compiling
 USB_WAIT_FOR_ENUMERATION = no  # may want to try yes
 NO_USB_STARTUP_CHECK = no # may want to try yes
 DEFERRED_EXEC_ENABLE = no
